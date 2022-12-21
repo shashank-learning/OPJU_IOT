@@ -1,0 +1,57 @@
+
+
+1.	Go to Downloads folder
+cd Downloads
+
+2.	Install the OpenVINO (2020.4) toolkit using wget command
+wget --no-check-certificate https://storage.openvinotoolkit.org/repositories/openvino/packages/2020.4/l_openvino_toolkit_runtime_raspbian_p_2020.4.287.tgz
+
+By default, the package file is saved as l_openvino_toolkit_runtime_raspbian_p_<version>.tgz.
+
+Note: If the file isn’t run by wget, use go to this link and download from GUI
+Link : https://storage.openvinotoolkit.org/repositories/openvino/packages/2020.4/ 
+
+3.	Create an installation folder.
+
+sudo mkdir -p /opt/intel/openvino_2021
+
+4.	Unpack the archive:
+
+sudo tar -xf  l_openvino_toolkit_runtime_raspbian_p_2020.4.287.tgz --strip 1 -C /opt/intel/openvino_2021
+
+
+5.	Set the Environment Variables
+You must update several environment variables before you can compile and run OpenVINO toolkit applications. Run the following script to temporarily set the environment variables:
+source /opt/intel/openvino_2021/bin/setupvars.sh
+
+**(Optional)** The OpenVINO environment variables are removed when you close the shell. As an option, you can permanently set the environment variables as follows:
+Ssh 
+
+6.	Add USB Rules for an Intel® Neural Compute Stick 2 device
+This task applies only if you have an Intel® Neural Compute Stick 2 device.
+Add the current Linux user to the users group:
+
+sudo usermod -a -G users "$(whoami)"
+
+To perform inference on the Intel® Neural Compute Stick 2, install the USB rules running the install_NCS_udev_rules.sh script:
+
+sh /opt/intel/openvino_2021/install_dependencies/install_NCS_udev_rules.sh
+
+
+7.	Log out and log in for it to take effect. (Reboot )
+
+sudo reboot
+
+To test your change, open a new terminal. You will see the following:
+
+[setupvars.sh] OpenVINO environment initialized
+
+8.	Plug in your Intel® Neural Compute Stick 2 in USB 2.0
+
+9.	Checking for Movidius Device (VPU)
+
+dmesg | grep Movidius
+
+You will get the following output indicating that we have Movidius MyriadX connected to Raspberry Pi
+
+ 
